@@ -1,4 +1,4 @@
-# drbpwn
+# drbpwn - CVE-2011-5330 exploit in ruby
 
 ## Description
 This Ruby script provides a workaround for exploiting Distributed Ruby (DRb) vulnerabilities using instance_eval and syscall methods. It aims to serve as an alternative to the missing Metasploit module for DRb exploitation. While the Metasploit module might reappear in future versions, this script can be utilized in the meantime when other exploits are not readily available.
