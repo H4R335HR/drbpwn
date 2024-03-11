@@ -40,7 +40,7 @@ class DRbExploit
       DRb.stop_service
     end
     puts "Payload executed from file #{filename}!" unless filename.nil?
-    #puts 'Make sure to remove that file' unless filename.nil?
+    puts 'Make sure to remove that file' unless filename.nil?
   end
 
   private
